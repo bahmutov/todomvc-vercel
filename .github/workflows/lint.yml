@@ -12,7 +12,8 @@ jobs:
         env:
           # avoid downloading and unzipping Cypress binary
           # which saves time - we do not plan to run Cypress tests
-          # in this lint workflow
+          # in this lint workflow, see
+          # https://on.cypress.io/installing
           CYPRESS_INSTALL_BINARY: 0
       - name: Lint
         run: npm run lint
