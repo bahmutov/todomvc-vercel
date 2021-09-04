@@ -5,7 +5,9 @@
   "description": "Example app deployed to Vercel and testing using Cypress/included Docker image",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "cy:open": "cypress open",
+    "dev": "start-test 3000 cy:open"
   },
   "dependencies": {
     "react": "16",
@@ -13,10 +15,16 @@
     "react-scripts": "3.2"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "cypress": "8.3.1",
+    "eslint-plugin-cypress": "2.11.3",
+    "prettier": "2.2.1",
+    "start-server-and-test": "1.14.0"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:cypress/recommended"
+    ]
   },
   "browserslist": [
     ">0.2%",
