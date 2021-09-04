@@ -1,0 +1,29 @@
+name: deploy
+on: deployment_status
+jobs:
+  tests-after-deploy:
+    # only runs this job on successful deploy
+    # https://glebbahmutov.com/blog/develop-preview-test/
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-20.04
+    steps:
+      # see if there is GITHUB_REF
+      - name: Check GITHUB_REF
+        run: |
+          echo "GITHUB_REF is ${GITHUB_REF}"
+      # to compute the branch name for the deployed commit
+      # need to grab the repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Run tests
+        run: |
+          echo "Vercel unique deployment URL is ${{ github.event.deployment_status.target_url }}"
+
+          echo "Deployed commit ${{ github.sha }}"
+          export BRANCH_NAME=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')
+          echo "Deployed branch ${BRANCH_NAME}"
+
+          export TEST_URL=${{ github.event.deployment_status.target_url }}

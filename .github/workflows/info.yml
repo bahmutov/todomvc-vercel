@@ -1,0 +1,36 @@
+# print info from deployment events sent by Vercel
+# https://glebbahmutov.com/blog/develop-preview-test/
+name: info
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+on: [deployment, deployment_status]
+jobs:
+  show-event:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      # to compute the branch name for the deployed commit
+      # need to grab the repo
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # https://stackoverflow.com/questions/6059336/how-to-find-the-current-git-branch-in-detached-head-state
+      - name: Compute branch name
+        run: |
+          echo "Current commit ${{ github.sha }}"
+          echo "all branches:"
+          git branch -a
+          echo "HEAD branches"
+          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //'
+          echo "branches with commit"
+          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/'
+          echo "one branch"
+          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g'
+          echo "maybe branch"
+          export BRANCH_NAME=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')
+          echo "current commit branch ${BRANCH_NAME}"
