@@ -7,7 +7,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "cy:open": "cypress open",
-    "dev": "start-test 3000 cy:open"
+    "dev": "start-test 3000 cy:open",
+    "lint": "eslint 'src/**/*.js' 'cypress/**/*.js'"
   },
   "dependencies": {
     "react": "16",
