@@ -6,6 +6,10 @@ jobs:
     # https://glebbahmutov.com/blog/develop-preview-test/
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-20.04
+    # Use a Docker image with Cypress installed globally
+    # https://github.com/cypress-io/github-action#docker-image
+    # https://github.com/cypress-io/cypress-docker-images
+    container: cypress/included:8.3.1
     steps:
       # see if there is GITHUB_REF
       - name: Check GITHUB_REF
@@ -18,6 +22,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Notice that we do not install any dependencies in this job
+      # Our Cypress tests do not use any plugins, so we just
+      # need to invoke the global Cypress from the Docker image
+
       - name: Run tests
         run: |
           echo "Vercel unique deployment URL is ${{ github.event.deployment_status.target_url }}"
@@ -26,4 +34,5 @@ jobs:
           export BRANCH_NAME=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')
           echo "Deployed branch ${BRANCH_NAME}"
 
-          export TEST_URL=${{ github.event.deployment_status.target_url }}
+          export CYPRESS_baseUrl=${{ github.event.deployment_status.target_url }}
+          cypress run
