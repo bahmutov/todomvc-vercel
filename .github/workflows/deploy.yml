@@ -34,5 +34,7 @@ jobs:
           export BRANCH_NAME=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')
           echo "Deployed branch ${BRANCH_NAME}"
 
-          export CYPRESS_baseUrl=${{ github.event.deployment_status.target_url }}
-          cypress run
+          # show the info about the browsers
+          # already installed in the Docker image
+          cypress info
+          cypress run --config baseUrl=${{ github.event.deployment_status.target_url }}
