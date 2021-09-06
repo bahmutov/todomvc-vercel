@@ -1,5 +1,9 @@
 /// <reference types="cypress" />
 
+// load and register the grep feature
+// https://github.com/bahmutov/cypress-grep
+require('cypress-grep')()
+
 it('works', () => {
   cy.visit('/')
   // application starts with 3 todos
