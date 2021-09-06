@@ -37,4 +37,11 @@ jobs:
           # show the info about the browsers
           # already installed in the Docker image
           cypress info
+
+          # first try to run some tests by name multiple times
+          # using the plugin https://github.com/cypress-io/cypress-grep
+          cypress run --env grep=works,burn=5 \
+            --config baseUrl=${{ github.event.deployment_status.target_url }}
+
+          # then run all the tests
           cypress run --config baseUrl=${{ github.event.deployment_status.target_url }}
