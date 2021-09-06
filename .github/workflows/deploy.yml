@@ -22,9 +22,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Notice that we do not install any dependencies in this job
-      # Our Cypress tests do not use any plugins, so we just
-      # need to invoke the global Cypress from the Docker image
+      # if we did not _any_ Cypress plugins, we could skip the
+      # NPM install step completely. As we are using the "cypress-grep"
+      # plugin, we need to install it. But we do not need to install
+      # the heavy modules like Cypress itself
+      - name: Install Cypress plugins
+        run: npm i -D cypress-grep
 
       - name: Run tests
         run: |
