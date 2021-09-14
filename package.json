@@ -16,7 +16,7 @@
     "react-scripts": "3.2"
   },
   "devDependencies": {
-    "cypress": "8.3.1",
+    "cypress": "8.4.0",
     "cypress-grep": "2.5.3",
     "eslint-plugin-cypress": "2.11.3",
     "prettier": "2.2.1",
