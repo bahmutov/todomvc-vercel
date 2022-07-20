@@ -1,5 +1,5 @@
 # todomvc-vercel [![renovate-app badge][renovate-badge]][renovate-app] [![ci status][ci image]][ci url]
-![cypress version](https://img.shields.io/badge/cypress-10.3.0-brightgreen) ![cypress-grep version](https://img.shields.io/badge/cypress--grep-2.5.3-brightgreen)
+![cypress version](https://img.shields.io/badge/cypress-10.3.1-brightgreen) ![cypress-grep version](https://img.shields.io/badge/cypress--grep-2.5.3-brightgreen)
 > Example app deployed to Vercel and testing using Cypress/included Docker image
 
 Read the blog post [Skip Cypress Install On CI](https://glebbahmutov.com/blog/skip-cypress-install-on-ci/)
