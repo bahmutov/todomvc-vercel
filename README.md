@@ -1,6 +1,6 @@
 # todomvc-vercel [![renovate-app badge][renovate-badge]][renovate-app] [![ci status][ci image]][ci url]
 
-![cypress version](https://img.shields.io/badge/cypress-12.14.0-brightgreen) ![cypress-grep version](https://img.shields.io/badge/cypress--grep-2.5.3-brightgreen)
+![cypress version](https://img.shields.io/badge/cypress-12.15.0-brightgreen) ![cypress-grep version](https://img.shields.io/badge/cypress--grep-2.5.3-brightgreen)
 
 > Example app deployed to Vercel and testing using Cypress/included Docker image
 
