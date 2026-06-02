@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "cypress": "12.17.1",
-    "cypress-grep": "2.14.0",
+    "cypress-grep": "3.0.4",
     "eslint-plugin-cypress": "2.15.2",
     "prettier": "2.2.1",
     "start-server-and-test": "1.14.0"
